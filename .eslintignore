@@ -1,0 +1,8 @@
+build
+node_modules
+
+src/serviceWorker.ts
+src/setupTests.ts
+
+public/OneSignalSDKUpdaterWorker.js
+public/OneSignalSDKWorker.js

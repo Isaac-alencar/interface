@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useWalletContext } from "contexts/walletContext";
 import { useNetwork } from "hooks/useNetwork";
 import RibonABI from "utils/abis/RibonAbi.json";

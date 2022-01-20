@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import image from "assets/images/newspaper.svg";
+import React from "react";
 import ModalImage, { Props } from ".";
 
 export default {

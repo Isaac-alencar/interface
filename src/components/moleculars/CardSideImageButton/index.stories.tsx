@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import CardImage from "assets/images/newspaper.svg";
+import React from "react";
 import theme from "styles/theme";
 import CardSideImageButton, { Props } from ".";
 
