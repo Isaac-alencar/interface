@@ -69,6 +69,7 @@ function CausesPage(): JSX.Element {
   }, []);
 
   const closeWarningModal = useCallback(() => {
+    logEvent("dailyTicketDial_view");
     setWarningModalVisible(false);
   }, []);
 
