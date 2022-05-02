@@ -9,7 +9,6 @@ import { logEvent } from "services/analytics";
 import useNavigation from "hooks/useNavigation";
 import usePromoterDonations from "hooks/apiTheGraphHooks/usePromoterDonations";
 import { useWalletContext } from "contexts/walletContext";
-import { useEffect } from "react";
 import RightArrowBlack from "./assets/right-arrow-black.svg";
 import { ReactComponent as BlueRightArrow } from "./assets/right-arrow-blue.svg";
 import * as S from "./styles";
@@ -23,8 +22,10 @@ function GivingsSection(): JSX.Element {
   const { wallet, connectWallet } = useWalletContext();
   const { isMobile } = useBreakpoint();
   const coin = "USDC";
-  const { promoterDonations, getPromoterDonations, isLoading } =
-    usePromoterDonations(wallet || "", isMobile ? 2 : 3);
+  const { promoterDonations, isLoading } = usePromoterDonations(
+    wallet,
+    isMobile ? 2 : 3,
+  );
   const handleShowGivingsButtonClick = () => {
     logEvent("fundShowGivingsListBtn_click", {
       from: "yourGivingsCarousel",
@@ -56,10 +57,6 @@ function GivingsSection(): JSX.Element {
     return promoterDonations?.length !== 0 && wallet;
   }
 
-  useEffect(() => {
-    getPromoterDonations();
-  }, [wallet]);
-
   function renderCardsCarousel() {
     return promoterDonations?.map((item: any) => (
       <div className="keen-slider__slide" key={item.id}>
@@ -81,7 +78,7 @@ function GivingsSection(): JSX.Element {
       {shouldRenderCarousel() ? (
         !isLoading && (
           <Carousel sliderPerView={isMobile ? 1.8 : 4} spacing={-10}>
-            {renderCardsCarousel() as any}
+            {renderCardsCarousel()}
             {false && (
               <div className="keen-slider__slide">
                 <S.LastCardCarousel

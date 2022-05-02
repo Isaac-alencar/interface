@@ -1,12 +1,11 @@
 import promoterDonationsApi from "services/apiTheGraph/promoterDonationsApi";
 import { useApi } from "hooks/useApi";
-import { useCallback } from "react";
 
-function usePromoterDonations(user: string, maxQuantity: number) {
-  const fetchMethod = useCallback(
-    async () => promoterDonationsApi.fetchPromoterDonations(user, maxQuantity),
-    [user],
-  );
+function usePromoterDonations(user: string | null, maxQuantity: number) {
+  const fetchMethod = user
+    ? () => promoterDonationsApi.fetchPromoterDonations(user, maxQuantity)
+    : undefined;
+
   const {
     data: promoterDonations,
     refetch,
@@ -14,6 +13,9 @@ function usePromoterDonations(user: string, maxQuantity: number) {
   } = useApi<any>({
     key: "promoterDonations",
     fetchMethod,
+    options: {
+      enabled: !!user,
+    },
   });
 
   console.log(promoterDonations);
