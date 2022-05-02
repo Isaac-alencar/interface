@@ -3,31 +3,28 @@ import Carousel from "components/moleculars/sliders/Carousel";
 import CardDoubleTextDividerButton from "components/moleculars/cards/CardDoubleTextDividerButton";
 import useBreakpoint from "hooks/useBreakpoint";
 import Button from "components/atomics/Button";
-import { logError } from "services/crashReport";
 import { formatFromWei } from "lib/web3Helpers/etherFormatters";
 import { formatDate } from "lib/web3Helpers/timeStampFormatters";
-import { useEffect, useState, useCallback } from "react";
 import { logEvent } from "services/analytics";
 import useNavigation from "hooks/useNavigation";
 import usePromoterDonations from "hooks/apiTheGraphHooks/usePromoterDonations";
 import { useWalletContext } from "contexts/walletContext";
+import { useEffect } from "react";
 import RightArrowBlack from "./assets/right-arrow-black.svg";
 import { ReactComponent as BlueRightArrow } from "./assets/right-arrow-blue.svg";
 import * as S from "./styles";
 import "keen-slider/keen-slider.min.css";
 
 function GivingsSection(): JSX.Element {
-  const [promoterDonations, setPromoterDonations] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
   const { navigateTo } = useNavigation();
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.fundPage.givingsSection",
   });
   const { wallet, connectWallet } = useWalletContext();
-  const { getPromoterDonations } = usePromoterDonations();
   const { isMobile } = useBreakpoint();
   const coin = "USDC";
-
+  const { promoterDonations, getPromoterDonations, isLoading } =
+    usePromoterDonations(wallet || "", isMobile ? 2 : 3);
   const handleShowGivingsButtonClick = () => {
     logEvent("fundShowGivingsListBtn_click", {
       from: "yourGivingsCarousel",
@@ -38,21 +35,6 @@ function GivingsSection(): JSX.Element {
     }
     connectWallet();
   };
-
-  const fetchPromoterDonations = useCallback(
-    async (user: string) => {
-      setLoading(true);
-      try {
-        const donations = await getPromoterDonations(user, isMobile ? 2 : 3);
-        setPromoterDonations(donations);
-      } catch (e) {
-        logError(e);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [wallet],
-  );
 
   const handleSupportButtonClick = () => {
     if (wallet) {
@@ -66,22 +48,20 @@ function GivingsSection(): JSX.Element {
     connectWallet();
   };
 
-  useEffect(() => {
-    if (wallet) {
-      fetchPromoterDonations(wallet);
-    }
-  }, [wallet]);
-
   function concatLinkHash(hash: string) {
     return `https://mumbai.polygonscan.com/tx/${hash}`;
   }
 
   function shouldRenderCarousel() {
-    return promoterDonations?.promoterDonations.length !== 0 && wallet;
+    return promoterDonations?.length !== 0 && wallet;
   }
 
+  useEffect(() => {
+    getPromoterDonations();
+  }, [wallet]);
+
   function renderCardsCarousel() {
-    return promoterDonations?.promoterDonations.map((item: any) => (
+    return promoterDonations?.map((item: any) => (
       <div className="keen-slider__slide" key={item.id}>
         <CardDoubleTextDividerButton
           key={item.id}
@@ -99,9 +79,9 @@ function GivingsSection(): JSX.Element {
     <S.Container>
       <S.SectionTitle>{t("subtitleGivings")}</S.SectionTitle>
       {shouldRenderCarousel() ? (
-        !loading && (
+        !isLoading && (
           <Carousel sliderPerView={isMobile ? 1.8 : 4} spacing={-10}>
-            {renderCardsCarousel()}
+            {renderCardsCarousel() as any}
             {false && (
               <div className="keen-slider__slide">
                 <S.LastCardCarousel
