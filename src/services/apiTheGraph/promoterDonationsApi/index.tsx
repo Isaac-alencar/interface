@@ -23,6 +23,12 @@ export const promoterDonationsApi = {
         user,
         first,
       },
+      fetchPolicy: "no-cache",
+    }),
+
+  refetchPromoterDonations: () =>
+    client.refetchQueries({
+      include: ["promoterDonations"],
     }),
 };
 

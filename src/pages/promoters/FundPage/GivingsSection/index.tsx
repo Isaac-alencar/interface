@@ -31,8 +31,8 @@ type LocationStateType = {
 };
 
 function GivingsSection(): JSX.Element {
-  const [promoterDonations, setPromoterDonations] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [promoterDonations, setPromoterDonations] = useState<any>();
+  // const [loading, setLoading] = useState<boolean>(false);
   const toast = useToast();
   const provider = useProvider();
   const { navigateTo } = useNavigation();
@@ -40,8 +40,9 @@ function GivingsSection(): JSX.Element {
     keyPrefix: "promoters.fundPage.givingsSection",
   });
   const { wallet, connectWallet } = useWalletContext();
-  const { getPromoterDonations } = usePromoterDonations();
   const { isMobile } = useBreakpoint();
+  const { promoterDonations, refetchPromoterDonations, loading } =
+    usePromoterDonations(wallet || "", isMobile ? 2 : 3);
   const coin = "USDC";
   const contract = useContract({
     address: RIBON_CONTRACT_ADDRESS,
@@ -63,21 +64,6 @@ function GivingsSection(): JSX.Element {
     connectWallet();
   };
 
-  const fetchPromoterDonations = useCallback(
-    async (user: string) => {
-      setLoading(true);
-      try {
-        const donations = await getPromoterDonations(user, isMobile ? 2 : 3);
-        setPromoterDonations(donations.promoterDonations);
-      } catch (e) {
-        logError(e);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [wallet],
-  );
-
   const transactionIsBeingProcessed = useCallback(
     async (hash: string) => {
       if (!hash) return;
@@ -85,10 +71,7 @@ function GivingsSection(): JSX.Element {
         const receipt = await provider?.getTransactionReceipt(hash);
         if (receipt) {
           setProcessingTransaction(false);
-          setPromoterDonations((prevState: any) => [
-            { ...state, processing: false },
-            ...prevState,
-          ]);
+          refetchPromoterDonations();
           window.history.replaceState({}, "");
           toast({
             message: t("transactionSuccessText"),
@@ -114,12 +97,6 @@ function GivingsSection(): JSX.Element {
 
     connectWallet();
   };
-
-  useEffect(() => {
-    if (wallet) {
-      fetchPromoterDonations(wallet);
-    }
-  }, [wallet]);
 
   useEffect(() => {
     contract?.on("PoolBalanceIncreased", () => {

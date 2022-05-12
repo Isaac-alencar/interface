@@ -1,10 +1,11 @@
 import { useQuery, UseQueryOptions } from "react-query";
 import { logError } from "services/crashReport";
 import { AxiosResponse } from "axios";
+import { ApolloQueryResult } from "@apollo/client";
 
 interface Props {
   key: string;
-  fetchMethod(): Promise<AxiosResponse>;
+  fetchMethod(): Promise<AxiosResponse> | Promise<ApolloQueryResult<any>>;
   options?: UseQueryOptions<any, Error, any>;
 }
 export function useApi<T>({ key, fetchMethod, options }: Props) {
