@@ -57,7 +57,8 @@ function CausesPage(): JSX.Element {
     setConfirmModalVisible(false);
   }, []);
 
-  const donate = useCallback(
+  // TODO: Change this to another place
+  const goToDonationInProcess = useCallback(
     async (email: string) => {
       try {
         if (!signedIn) {
@@ -84,7 +85,7 @@ function CausesPage(): JSX.Element {
       {chosenNonProfit && (
         <ConfirmSection
           chosenNonProfit={chosenNonProfit}
-          donate={donate}
+          donate={goToDonationInProcess}
           confirmModalVisible={confirmModalVisible}
           setConfirmModalVisible={setConfirmModalVisible}
           closeConfirmModal={closeConfirmModal}

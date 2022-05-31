@@ -35,6 +35,7 @@ function DonationInProcessPage(): JSX.Element {
     setUserLastDonation(today());
   }
 
+  // TODO: create response status factory - based on the response and status
   async function handleDonation() {
     if (!currentUser) return;
 

@@ -3,6 +3,7 @@ import { client } from "..";
 
 export const PROMOTER_DONATIONS_QUERY_NAME = "PROMOTER_DONATIONS_QUERY";
 
+// TODO: fix the SRP here. Change the query to another place. Create a place just for queries
 export const QUERY_PROMOTER = gql`
   query ${PROMOTER_DONATIONS_QUERY_NAME}($user: Bytes!, $first: Int) {
     promoterDonations(

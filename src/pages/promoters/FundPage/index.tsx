@@ -15,9 +15,10 @@ import useContractBalance from "hooks/apiHooks/useContractBalance";
 import * as S from "./styles";
 import GivingsSection from "./GivingsSection";
 import ModalOnboarding from "./ModalOnboarding";
+import { Currencies } from "types/enums/Currencies";
 
 function FundPage(): JSX.Element {
-  const coin = "USDC";
+  const coin = Currencies.USDC;
   const { navigateTo } = useNavigation();
 
   const { t } = useTranslation("translation", {

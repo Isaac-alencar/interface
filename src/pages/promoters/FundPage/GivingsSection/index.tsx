@@ -62,6 +62,7 @@ function GivingsSection(): JSX.Element {
     connectWallet();
   };
 
+  // TODO: we can put this in a custom hook
   const fetchPromoterDonations = useCallback(
     async (user: string) => {
       setLoading(true);
@@ -77,6 +78,7 @@ function GivingsSection(): JSX.Element {
     [wallet],
   );
 
+  // TODO: change this to another place. Maybe change to a custom hook
   const transactionIsBeingProcessed = useCallback(
     async (hash: string) => {
       if (!hash) return;
@@ -162,6 +164,7 @@ function GivingsSection(): JSX.Element {
       />
     ));
   }
+
   return (
     <S.Container>
       <S.SectionTitle>{t("subtitleGivings")}</S.SectionTitle>
