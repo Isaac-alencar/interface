@@ -88,24 +88,7 @@ function CardPaymentInformationProvider({ children }: Props) {
   const [securityCode, setSecurityCode] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
-  const handleSubmit = () => {
-    console.log({
-      currentCoin,
-      givingValue,
-      givingValues,
-      givingTotal,
-      country,
-      state,
-      city,
-      taxId,
-      email,
-      cardNumber,
-      cardName,
-      expirationDate,
-      securityCode,
-      selectedButtonIndex,
-    });
-  };
+  const handleSubmit = () => {};
 
   const cardPaymentInformationObject: ICardPaymentInformationContext = useMemo(
     () => ({
