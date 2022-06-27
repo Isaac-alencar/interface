@@ -136,8 +136,7 @@
         "cardNumber": "Número do cartão",
         "cardName": "Nome impresso no cartão",
         "cardDueDate": "Vencimento",
-        "securityCode": "Código de segurança",
-        "paymentFailedText": "Falha no pagamento. Tente novamente."
+        "securityCode": "Código de segurança"
       },
       "linkMessageToast": "Saiba mais"
     }
@@ -147,6 +146,13 @@
       "ethereumNotFoundMessage": "Instale a Metamask para continuar",
       "userRejectedConnectionMessage": "Conexão com a carteira negada",
       "onErrorMessage": "Falha na conexão da carteira"
+    },
+    "cardPaymentInformation": {
+      "onErrorMessage": "Falha no pagamento. Tente novamente.",
+      "loadingMessage": "Confirmando pagamento...",
+      "modalSuccessTitle": "Você incluiu {{value}} USDC ao tesouro!",
+      "modalSuccessDescription": "Sua doação foi convertida em criptomoedas para financiar mais vales.",
+      "modalSuccessButton": "Ok"
     }
   }
 }

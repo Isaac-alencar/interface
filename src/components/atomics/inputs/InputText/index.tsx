@@ -9,6 +9,7 @@ export type Props = {
   maxLength?: number;
   minLength?: number;
   required?: boolean;
+  disabled?: boolean;
   onChange?: (value: any) => void;
 };
 
@@ -21,6 +22,7 @@ function InputText({
   required,
   maxLength,
   minLength,
+  disabled,
 }: Props): JSX.Element {
   return (
     <S.Container>
@@ -34,6 +36,7 @@ function InputText({
         maxLength={maxLength}
         minLength={minLength}
         onChange={onChange}
+        disabled={disabled}
       />
     </S.Container>
   );

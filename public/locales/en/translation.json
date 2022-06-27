@@ -135,8 +135,7 @@
         "cardNumber": "Card number",
         "cardName": "Name on card",
         "cardDueDate": "Expiration",
-        "securityCode": "Card verification code",
-        "paymentFailedText": "Payment failed. Try again."
+        "securityCode": "Card verification code"
       },
       "linkMessageToast": "Learn more"
     }
@@ -146,6 +145,13 @@
       "ethereumNotFoundMessage": "Install Metamask to continue",
       "userRejectedConnectionMessage": "Wallet connection rejected",
       "onErrorMessage": "Wallet connection failed"
+    },
+    "cardPaymentInformation": {
+      "onErrorMessage": "Payment failed. Try again.",
+      "loadingMessage": "Payment in progress...",
+      "modalSuccessTitle": "Payment",
+      "modalSuccessDescription": "Payment successful",
+      "modalSuccessButton": "Ok"
     }
   }
 }

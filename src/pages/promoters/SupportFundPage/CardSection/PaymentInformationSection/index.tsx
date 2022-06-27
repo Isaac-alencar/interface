@@ -1,8 +1,6 @@
-import Button from "components/atomics/Button";
 import InputText from "components/atomics/inputs/InputText";
 import { useCardPaymentInformation } from "contexts/cardPaymentInformationContext";
-
-import useToast from "hooks/useToast";
+import { useCurrentUser } from "contexts/currentUserContext";
 import { maskToCreditCard } from "lib/maskToCreditCard";
 import { maskToExpirationDate } from "lib/maskToExpirationDate";
 import { useEffect } from "react";
@@ -14,8 +12,6 @@ function PaymentInformation() {
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportFundPage.paymentInformationSection",
   });
-
-  const toast = useToast();
 
   const {
     email,
@@ -30,12 +26,7 @@ function PaymentInformation() {
     setSecurityCode,
   } = useCardPaymentInformation();
 
-  const handleSubmit = () => {
-    toast({
-      message: t("paymentFailedText"),
-      type: "error",
-    });
-  };
+  const { currentUser } = useCurrentUser();
 
   useEffect(() => {
     logEvent("fundSupportPayment_view");
@@ -60,6 +51,7 @@ function PaymentInformation() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
+        disabled={!!currentUser?.email}
       />
       <InputText
         name="cardNumber"
@@ -93,7 +85,6 @@ function PaymentInformation() {
           required
         />
       </S.Half>
-      <Button text="teste" onClick={handleSubmit} />
     </S.PaymentInformationSectionContainer>
   );
 }

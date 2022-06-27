@@ -14,6 +14,7 @@ const { lightGray } = theme.colors;
 
 function CardSection(): JSX.Element {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+
   const { t } = useTranslation("translation", {
     keyPrefix: "promoters.supportFundPage.cardSection",
   });
@@ -67,7 +68,6 @@ function CardSection(): JSX.Element {
         onOptionChanged={(value) => setCurrentCoin(value)}
       />
       <S.Subtitle>{t("subtitleCard")}</S.Subtitle>
-
       <S.ValuesContainer>
         {givingValues?.map((item, index) => (
           <S.CardValueButton
@@ -80,10 +80,10 @@ function CardSection(): JSX.Element {
           />
         ))}
       </S.ValuesContainer>
-
       <Divider color={lightGray} />
 
       {sections[currentSectionIndex]}
+
       <S.ButtonContainer>
         <S.FinishButton
           text={

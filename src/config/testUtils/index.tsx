@@ -35,6 +35,11 @@ import ModalProvider, {
   ModalContext,
 } from "contexts/modalContext";
 
+import CardPaymentInformationProvider, {
+  CardPaymentInformationContext,
+  ICardPaymentInformationContext,
+} from "contexts/cardPaymentInformationContext";
+
 export function renderWithTheme(children: React.ReactNode): RenderResult {
   return render(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
 }
@@ -82,6 +87,7 @@ export type RenderComponentProps = {
   toastProviderValue?: Partial<IToastContext>;
   loadingOverlayValue?: Partial<ILoadingOverlayContext>;
   modalProviderValue?: Partial<IModalContext>;
+  cardPaymentProviderValue?: Partial<ICardPaymentInformationContext>;
   locationState?: Record<any, any>;
 };
 export function renderComponent(
@@ -94,6 +100,7 @@ export function renderComponent(
     locationState = {},
     loadingOverlayValue = {},
     modalProviderValue = {},
+    cardPaymentProviderValue = {},
   }: RenderComponentProps = {},
 ): RenderWithContextResult {
   const queryClient = new QueryClient();
@@ -107,26 +114,31 @@ export function renderComponent(
           <I18nextProvider i18n={i18n}>
             <Router history={historyObject}>
               {renderProvider(
-                WalletProvider,
-                WalletContext,
-                walletProviderValue,
+                CardPaymentInformationProvider,
+                CardPaymentInformationContext,
+                cardPaymentProviderValue,
                 renderProvider(
-                  CurrentUserProvider,
-                  CurrentUserContext,
-                  currentUserProviderValue,
+                  WalletProvider,
+                  WalletContext,
+                  walletProviderValue,
                   renderProvider(
-                    ToastContextProvider,
-                    ToastContext,
-                    toastProviderValue,
+                    CurrentUserProvider,
+                    CurrentUserContext,
+                    currentUserProviderValue,
                     renderProvider(
-                      LoadingOverlayProvider,
-                      LoadingOverlayContext,
-                      loadingOverlayValue,
+                      ToastContextProvider,
+                      ToastContext,
+                      toastProviderValue,
                       renderProvider(
-                        ModalProvider,
-                        ModalContext,
-                        modalProviderValue,
-                        component,
+                        LoadingOverlayProvider,
+                        LoadingOverlayContext,
+                        loadingOverlayValue,
+                        renderProvider(
+                          ModalProvider,
+                          ModalContext,
+                          modalProviderValue,
+                          component,
+                        ),
                       ),
                     ),
                   ),

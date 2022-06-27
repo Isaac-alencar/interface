@@ -12,5 +12,9 @@ export const Input = styled.input`
     border: 1px solid ${theme.colors.ribonBlue};
     border-radius: 8px;
     padding: 8px 16px 8px 16px;
+
+    &:disabled {
+      border: 1px solid ${theme.colors.darkGray};
+    }
   `}
 `;
