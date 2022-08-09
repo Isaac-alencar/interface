@@ -4,12 +4,12 @@
       "donationModalTitle": "Você recebeu um ticket doação",
       "donationModalBody": "Use seu ticket gratuito para fazer uma doação",
       "donationModalButtonText": "Continuar",
-      "confirmModalTitle": "Entre ou registre-se para usar seu ticket doação",
+      "confirmModalTitle": "Insira seu e-mail para usar seu ticket doação",
       "confirmModalAuthTitle": "Confirmar doação",
       "confirmModalPrimaryButtonText": "Confirmar",
       "confirmModalSecondaryButtonText": "Cancelar",
       "donateText": "Usar ticket",
-      "donateBlockedText": "Bloqueado",
+      "donateBlockedText": "Sem tickets",
       "pageTitle": "Causas",
       "errorModalTitle": "Falha no processamento",
       "errorModalText": "A rede está instável e não foi possível registrar sua doação. Tente novamente, por favor.",
@@ -19,11 +19,11 @@
       "blockedModalFirstButtonText": "Contribuir agora",
       "blockedModalSecondButtonText": "Talvez depois",
       "modalForm": {
-        "footerStartText": "Ao inserir seu e-mail e se inscrever, você aceita os",
+        "footerStartText": "Ao inserir seu e-mail e se inscrever, você aceita a nossa",
         "footerAnd": "e",
         "useTermsText": "Termos de Serviço",
         "privacyPolicyText": "Política de Privacidade",
-        "privacyPolicyLink": "https://blog.ribon.io/2017/12/20/politica-de-privacidade/",
+        "privacyPolicyLink": "https://ribon.io/2021/06/01/politica-de-privacidade-e-retencao-de-dados-pessoais/",
         "useTermsLink": "https://blog.ribon.io/2021/07/12/termos-e-condicoes-de-uso-da-ribon/"
       }
     },
@@ -82,11 +82,13 @@
         "textLastCard": "Suas contribuições",
         "firstGivingButtonText": "Contribua agora",
         "firstGivingText": "Faça uma contribuição e veja ela aqui",
-        "subtitleGivings": "Suas contribuições",
+        "subtitleYourGivings": "Suas contribuições",
+        "subtitleAllGivings": "Todas as contribuições",
         "processingText": "Processando transação...",
         "transactionSuccessText": "Transação processada",
         "transactionFailedText": "Falha ao processar transação",
-        "linkMessageToast": "Saiba mais"
+        "linkMessageToast": "Saiba mais",
+        "cardDonationText": "Doação por cartão"
       },
       "modalOnboarding": {
         "title": "Tesouro de Doação da Ribon",
@@ -116,6 +118,7 @@
         "currency": "Moeda",
         "subtitleCard": "Escolha sua contribuição",
         "buttonTextCard": "Próximo",
+        "buttonSubmit": "Confirmar",
         "detailsSubtitle": "Detalhes da contribuição",
         "netGivingText": "Contribuição líquida: {{netGiving}}*",
         "serviceFeesText": "Taxas de serviço: {{serviceFees}}",
@@ -126,8 +129,17 @@
           "state": "Estado",
           "city": "Cidade",
           "taxId": "CPF"
+        },
+        "paymentInformationSection": {
+          "title": "Forma de pagamento",
+          "email": "E-mail",
+          "cardNumber": "Número do cartão",
+          "cardName": "Nome impresso no cartão",
+          "cardDueDate": "Vencimento",
+          "cvv": "Código de segurança"
         }
       },
+
       "linkMessageToast": "Saiba mais"
     }
   },
@@ -136,6 +148,13 @@
       "ethereumNotFoundMessage": "Instale a Metamask para continuar",
       "userRejectedConnectionMessage": "Conexão com a carteira negada",
       "onErrorMessage": "Falha na conexão da carteira"
+    },
+    "cardPaymentInformation": {
+      "onErrorMessage": "Falha no pagamento. Tente novamente.",
+      "loadingMessage": "Confirmando pagamento...",
+      "modalSuccessTitle": "Você incluiu {{value}} USDC ao tesouro!",
+      "modalSuccessDescription": "Sua doação foi convertida em criptomoedas para financiar mais vales.",
+      "modalSuccessButton": "Ok"
     }
   }
 }

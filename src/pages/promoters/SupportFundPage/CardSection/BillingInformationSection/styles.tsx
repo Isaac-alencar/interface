@@ -2,6 +2,13 @@ import styled, { css } from "styled-components";
 
 export const BillingInformationSectionContainer = styled.div`
   margin-top: 24px;
+  height: 256px;
+
+  ${({ theme }) => css`
+    @media (min-width: ${theme.breakpoints.pad}) {
+      height: auto;
+    }
+  `}
 `;
 
 export const Title = styled.h6`
@@ -18,16 +25,6 @@ export const Form = styled.form`
   & :nth-child(2) {
     margin-right: 4px;
   }
-`;
-
-export const Input = styled.input`
-  ${({ theme }) => css`
-    width: 100%;
-    margin-bottom: 12px;
-    border: 1px solid ${theme.colors.ribonBlue};
-    border-radius: 8px;
-    padding: 8px 16px 8px 16px;
-  `}
 `;
 
 export const HalfInput = styled.input`

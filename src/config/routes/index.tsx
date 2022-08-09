@@ -12,6 +12,8 @@ import FundPage from "pages/promoters/FundPage";
 import SupportFundPage from "pages/promoters/SupportFundPage";
 import GivingsPage from "pages/promoters/GivingsPage";
 import WalletLayout from "layouts/WalletLayout";
+import CardPaymentInformationProvider from "contexts/cardPaymentInformationContext";
+import NetworkProvider from "contexts/networkContext";
 import Navigation from "./Navigation";
 
 function RoutesComponent(): JSX.Element {
@@ -67,11 +69,13 @@ function RoutesComponent(): JSX.Element {
       <Route path="/promoters/fund" exact>
         <Suspense fallback={<div />}>
           <CurrentUserProvider>
-            <WalletProvider>
-              <WalletLayout>
-                <FundPage />
-              </WalletLayout>
-            </WalletProvider>
+            <NetworkProvider>
+              <WalletProvider>
+                <WalletLayout>
+                  <FundPage />
+                </WalletLayout>
+              </WalletProvider>
+            </NetworkProvider>
           </CurrentUserProvider>
         </Suspense>
       </Route>
@@ -79,11 +83,15 @@ function RoutesComponent(): JSX.Element {
       <Route path="/promoters/support-fund" exact>
         <Suspense fallback={<div />}>
           <CurrentUserProvider>
-            <WalletProvider>
-              <WalletLayout hideNavigation hasBackButton>
-                <SupportFundPage />
-              </WalletLayout>
-            </WalletProvider>
+            <NetworkProvider>
+              <WalletProvider>
+                <WalletLayout hideNavigation hasBackButton>
+                  <CardPaymentInformationProvider>
+                    <SupportFundPage />
+                  </CardPaymentInformationProvider>
+                </WalletLayout>
+              </WalletProvider>
+            </NetworkProvider>
           </CurrentUserProvider>
         </Suspense>
       </Route>
